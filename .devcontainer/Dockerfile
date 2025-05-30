@@ -32,16 +32,16 @@ RUN sudo apt-get update \
     && sudo apt-get clean -y \
     && sudo rm -rf /var/lib/apt/lists/*
 
-# Build and install Realsense-SDK
-WORKDIR /home/container_user
-RUN git clone --branch v2.56.2 https://github.com/IntelRealSense/librealsense.git
-WORKDIR /home/container_user/librealsense
-RUN sudo mkdir -p /etc/udev/rules.d && \
-    ./scripts/setup_udev_rules.sh \
-    ./scripts/patch-realsense-ubuntu-lts-hwe.sh 
-RUN mkdir build && cd build \
-    && cmake ../ \
-    && sudo make uninstall && make clean && make && sudo make install 
+# # Build and install Realsense-SDK
+# WORKDIR /home/container_user
+# RUN git clone --branch v2.56.2 https://github.com/IntelRealSense/librealsense.git
+# WORKDIR /home/container_user/librealsense
+# RUN sudo mkdir -p /etc/udev/rules.d && \
+#     ./scripts/setup_udev_rules.sh \
+#     ./scripts/patch-realsense-ubuntu-lts-hwe.sh 
+# RUN mkdir build && cd build \
+#     && cmake ../ \
+#     && sudo make uninstall && make clean && make && sudo make install 
 
 COPY rosPkgs.list /tmp/rosPkgs.list
 RUN sudo apt-get update \
